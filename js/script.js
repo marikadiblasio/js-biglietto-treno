@@ -28,11 +28,16 @@ let fullPrice = priceKm * kmTrip;
 let finalPrice;
 
 //Final Price
-if (userAge < 18){
-    finalPrice = fullPrice * discountTwenty;
-} else if (userAge > 65) {
-    finalPrice = fullPrice * discountForty;
+if ((kmTrip && !isNaN(kmTrip)) && (userAge && !isNaN(userAge))){
+    if (userAge < 18){
+        finalPrice = fullPrice * discountTwenty;
+    } else if (userAge > 65) {
+        finalPrice = fullPrice * discountForty;
+    } else {
+        finalPrice = fullPrice;
+    }
+    document.getElementById('ticket').innerHTML += `<p class="fs-4 ms-3 py-3">Il tuo viaggio di <span class="text-success border border-1 border-success px-1 rounded fw-semibold">${kmTrip} Km</span> per un passeggero di <span class="text-success border border-1 border-success px-1 rounded fw-semibold">${userAge} anni</span> costerà: <span class="text-success fs-1 fw-semibold">${finalPrice.toFixed(2)} € </span></p>`;
+
 } else {
-    finalPrice = fullPrice;
+    document.getElementById('ticket').innerHTML += `<p class="text-danger border border-danger border-2 rounded ms-3 fs-4">Inserire <span class="fw-semibold fs-1"> numeri </span>nel campo chilometri e nel campo età!</p>`;
 }
-document.getElementById('ticket').innerHTML += `<p>Il tuo viaggio di ${kmTrip} Km per un passeggero di ${userAge} anni costerà: ${finalPrice.toFixed(2)} €</p>`;
